@@ -1,0 +1,38 @@
+.btn_nav{
+  display: flex;
+  justify-content: center;
+  &__btn{
+    @include resetBtnStyle;
+    width:50%;
+    height: 50px;
+    background:$main-color;
+    color: #f9f9f9;
+    &:focus{
+      @include resetBtnFocus;
+    }
+  }
+}
+.btn_aha{
+  &:hover{
+    -moz-box-shadow: inset -2px 2px 5px $hover-color;
+    -webkit-box-shadow: inset -2px 2px 5px $hover-color;
+    box-shadow: inset -2px -2px 5px $hover-color;
+  }
+  &:focus{
+    -moz-box-shadow: inset -2px 2px 5px $hover-color;
+    -webkit-box-shadow: inset -2px 2px 5px $hover-color;
+    box-shadow: inset -2px -2px 5px $hover-color;
+  }
+}
+.btn_hop{
+  &:hover{
+    -moz-box-shadow: inset 2px -2px 5px $hover-color;
+    -webkit-box-shadow: inset 2px -2px 5px $hover-color;
+    box-shadow: inset 2px -2px 5px $hover-color;
+  }
+  &:focus{
+    -moz-box-shadow: inset 2px -2px 5px $hover-color;
+    -webkit-box-shadow: inset 2px -2px 5px $hover-color;
+    box-shadow: inset 2px -2px 5px $hover-color;
+  }
+}
