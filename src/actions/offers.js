@@ -17,3 +17,9 @@ export const filterOffers = (filter)=>{
     filter: filter
   }
 }
+export const searchOffers = (search)=>{
+  return{
+    type: actiontypes.SEARCH_OFFERS,
+    search: search
+  }
+}

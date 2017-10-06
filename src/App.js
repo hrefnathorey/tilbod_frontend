@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {  Navbar, Nav, MenuItem, Brand, Header, Grid, Row, Col } from 'react-bootstrap';
 import Offer from './components/Offer';
 import Filter from './components/Filter';
+import Search from './components/Search';
 import * as actionCreators from './actions/offers';
 
 
@@ -27,7 +29,8 @@ class App extends Component{
 
   priceToInt(price){
     return price ? parseInt(price.split('.').join("")) : null;
-  }
+  };
+
 
   render(){
 
@@ -45,26 +48,54 @@ class App extends Component{
         )
       })
     }
-    const offers = this.props.offers.filter(offer=>{
+
+
+
+    // else if(this.props.search){
+    //   this.props.offers.filter((offer)=>{
+    //     return b nameToLower().indexOf(b.toLowerCase())
+    //   })
+    // }
+
+    let offers = this.props.offers.filter(offer=>{
       return offer.price != undefined;
     })
+
+    if(this.props.search){
+      offers = this.props.offers.filter(offer=>
+        offer.title.toLowerCase().indexOf(this.props.search.toLowerCase()) > -1
+      )
+    }
+
     return(
       <div className="app_wrapper">
-        <div className="header">
-          <h1>Tilboð dagsins</h1>
-        </div>
-        <div className="btn_nav">
-          <button className="btn_nav__btn btn_aha" onClick={()=>this.displayOffers("aha")}>Aha</button>
-          <button className="btn_nav__btn btn_hop" onClick={()=>this.displayOffers("hopkaup")}>Hópkaup</button>
-        </div>
-        <div>
+        <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#">Tilboð dagsins</a>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav pullRight>
+          <MenuItem onClick={()=>this.displayOffers("aha")}>Aha</MenuItem>
+          <MenuItem onClick={()=>this.displayOffers("hopkaup")}>Hópkaup</MenuItem>
+        </Nav>
+        </Navbar>
+
+        <Grid>
+        <div className="container_filters">
           <Filter />
+          <Search />
         </div>
-
+          <Row className="show-grid">
           {this.props.displayOffers ? offers.map(offer=>{
-            return <Offer offer = {offer} />
+            return(
+              <Col xs={12} md={6}>
+                <Offer offer = {offer} />
+              </Col>
+            )
           }):null}
-
+          </Row>
+        </Grid>
 
       </div>
     )
@@ -76,7 +107,8 @@ const mapStateToProps = (state)=>{
   return{
     offers: state.offers,
     displayOffers: state.displayOffers,
-    filter: state.filter
+    filter: state.filter,
+    search: state.search
 
   }
 }

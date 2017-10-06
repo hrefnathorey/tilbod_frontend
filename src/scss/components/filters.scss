@@ -1,0 +1,9 @@
+.container_filters{
+  display:flex;
+  justify-content: flex-end;
+  margin:10px;
+}
+.btn_filter_price{
+  @include resetBtnFocus;
+  @include priceFilter;
+}

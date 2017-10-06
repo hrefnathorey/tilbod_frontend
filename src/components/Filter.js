@@ -6,8 +6,8 @@ import * as actionCreators from '../actions/offers'
 const Filter = props =>{
   const filterOffers = bindActionCreators(actionCreators.filterOffers, props.dispatch)
     return(
-      <div className="filtered_offer">
-        <select onChange={(a)=>{filterOffers(a.target.value)}}>
+      <div className="filter_price">
+        <select className="btn_filter_price" onChange={(a)=>{filterOffers(a.target.value)}}>
           <option value="choose">Choose filter</option>
           <option value="lowest">Lowest price first</option>
           <option value="highest">Highest price first</option>
